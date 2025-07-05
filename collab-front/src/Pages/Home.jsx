@@ -7,11 +7,10 @@ import {
   useUser,
 } from "@clerk/clerk-react";
 import { ArrowRight, Check } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import Dashboard from "./Dashboard";
 
 const Home = () => {
   const { user } = useUser();
-  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
@@ -23,32 +22,19 @@ const Home = () => {
           <SignedIn>
             <UserButton />
           </SignedIn>
-          {/* <SignedOut>
-            <SignInButton />
-          </SignedOut> */}
         </div>
       </header>
 
       <main className="px-6 py-16">
         <div className="max-w-4xl mx-auto text-center">
           <SignedIn>
-            <h2 className="text-3xl font-semibold text-slate-800 mb-4">
+            <h2 className="text-3xl font-semibold text-slate-800 mb-10">
               Welcome, {user?.firstName || "Developer"} 👋
             </h2>
-            <p className="text-lg text-slate-600 mb-6">
-              You're signed in! Let's get started.
-            </p>
-            <button
-              className="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200 text-lg"
-              onClick={() => navigate("/dashboard")} // adjust route as needed
-            >
-              Go to Dashboard
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </button>
+            <Dashboard />
           </SignedIn>
 
           <SignedOut>
-            {/* HERO CONTENT for signed-out users */}
             <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
               Collaborate on code reviews{" "}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -59,17 +45,16 @@ const Home = () => {
               Like Google Docs, but for pull requests.
             </p>
 
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <SignUpButton mode="modal">
-                <button className="inline-flex items-center px-8 py-4 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors duration-200 text-lg">
+                <button className="inline-flex items-center px-8 py-4 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors duration-200 text-lg cursor-pointer">
                   Get Started
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </button>
               </SignUpButton>
 
               <SignInButton mode="modal">
-                <button className="inline-flex items-center px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors duration-200 text-lg">
+                <button className="inline-flex items-center px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors duration-200 text-lg cursor-pointer">
                   Sign In
                 </button>
               </SignInButton>
@@ -79,7 +64,6 @@ const Home = () => {
               Review code together with your team in real time. Comment inline, discuss changes live, and merge with confidence—all without leaving your browser.
             </p>
 
-            {/* Benefits Section */}
             <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg border border-slate-200">
               <h2 className="text-2xl font-bold text-slate-900 mb-8">
                 Everything you need for modern code review
